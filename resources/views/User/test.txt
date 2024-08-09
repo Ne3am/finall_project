@@ -1,0 +1,219 @@
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+ 
+ MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=nanaqrc12345@gmail.com
+MAIL_PASSWORD=asecobzmvhumnmjf
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="nanaqrc12345@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+/*
+document.getElementById('userInput').addEventListener('focus',()=>{
+    document.querySelector('i.fa-solid').style.display = "block"
+})
+document.getElementById('userInput').addEventListener('blur',()=>{
+    document.querySelector('i.fa-solid').style.display = "none"
+    if(userInput.value !== ''){
+        document.querySelector('i.fa-solid').style.display = "block"
+    }
+})
+
+document.querySelector('.fa-solid').addEventListener('click',()=>{
+    if(userInput.value !==''){
+        userInput.value = ''
+    }
+})
+
+document.getElementById("btn").addEventListener("click", () => {
+
+    
+  let user = document.getElementById("userInput").value;
+
+  let mealAPI = fetch(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${user}`
+  );
+
+  mealAPI.then((getData)=>{
+    return getData.json();
+  }).then((sendData)=>{
+    console.log(sendData)
+    let data =''
+    sendData.meals.forEach((e, i) => {
+
+
+    
+        data +=`
+        <h2 class='strArea'>Food Area: ${e.strArea}</h2>
+        <h2 class='strMeal'>Food Name: ${e.strMeal}</h2>
+        <div class="row">
+        <form action="{{route('Meals.store')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+                    <input type="hidden" value="${e.strArea}" name="strArea">
+                    <input type="hidden" value="${e.strMeal}" name="strMeal">
+                    <input type="hidden" value="${e.strMealThumb}" name="image">
+                    <input type="hidden" value="${sendData.meals[0].strCategory}" name="category">
+        <div class="">
+            <img src="${e.strMealThumb}" alt="" class='img'>
+        </div>
+        <div class="ingredients">
+            <h2>Ingredients:</h2>
+            <ul>
+                <li>${e.strIngredient1}</li>
+                <li>${e.strIngredient2}</li>
+                <li>${e.strIngredient3}</li>
+                <li>${e.strIngredient4}</li>
+                <li>${e.strIngredient5}</li>
+                <li>${e.strIngredient6}</li>
+                <li>${e.strIngredient7}</li>
+                <li>${e.strIngredient8}</li>
+                <li>${e.strIngredient9}</li>
+                <li>${e.strIngredient10}</li>
+                <li>${e.strIngredient11}</li>
+                <li>${e.strIngredient12}</li>
+                <li>${e.strIngredient13}</li>
+                <li>${e.strIngredient14}</li>
+                <li>${e.strIngredient15}</li>
+            
+            </ul>
+        </div>
+        <input type="submit" value="order now" name="add_product" class="btn" style="background-color:red;color:yellow;border-radius:8px";border:3px solid red>
+        </form>
+    </div>
+        `
+        heading.innerHTML = ` <h1 class='strCategory'>Food Category: ${sendData.meals[0].strCategory}</h1>`
+        appendData.innerHTML = data
+    });
+  }).catch((error)=>{
+    document.querySelector('.find').style.display = 'none';
+    document.querySelector('.notfound').innerHTML = "Meal Not Found 😥";
+    document.querySelector('.try').innerHTML = "Try Something Else 😉";
+  })
+});
+*/
+
+
+
+<script>
+        <input type="hidden" value="" name="calories" id="output">
+        (function(){
+            const titleInput = document.getElementById('title');
+            const recipeInput = document.getElementById('recipe');
+            const output = document.getElementById('output');
+            const appId = 'c8e48860';
+            const apiKey = '57dcd389c62a444f2db8370d8d92a029';
+
+            function  fetchRecipe(){
+                let title = titleInput.value;
+                let ingr = recipeInput.value.split('\n');
+                return fetch(`https://api.edamam.com/api/nutrition-details?app_id=${appId}&app_key=${apiKey}`,{
+                    method: 'POST',
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({title,ingr})
+                }).then(response => response.json());
+
+            }
+
+            document.getElementById('recipe-check-form').addEventListener('submit',function(e){
+                e.preventDefault();
+                fetchRecipe().then(data => {
+                            let html = ` ${data.calories} `;
+                                
+                                output.value=html;
+                });
+            })
+        })();
+    </script>
+    $product->calories = strip_tags($request->input('calories')) ;
+    <div class="calories">{{$product['calories']}} </div>
+    =================================================
+    <form action="{{(route('Meals.store'))}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                    <input type="text" value="<?= $_GET['name']; ?>" id="title" name="name">
+                    </br></br>
+                    <input type="text" id="recipe" value="<?= $_GET['component']; ?>" name="component">
+                    </br></br>
+                    <input type="text" value="<?= $_GET['strArea']; ?>" name="strArea">
+                    </br></br>
+                    <input type="text" value="<?= $_GET['image']; ?>" name="image">
+                    </br></br>
+                    <input type="text" value="<?= $_GET['category']; ?>" name="category">
+                    </br></br>
+                    <input type="number" min="0" value="" max="9999999999" placeholder="enter product price" name="price" onkeypress="if(this.value.length == 10)
+                    return false;" class="box">
+                    </br></br>
+                    <input type="text" onclick="Frecipe()" value="" name="calories" placeholder="calories" class="box" id="output" require>
+                    </br></br>
+                    <input type="submit" value="order now" name="add_product" class="btn" style="background-color:red;color:yellow;border-radius:8px";border:3px solid red>
+                    </form>
+
+
+
+
+                    <?php 
+        use App\Events\TrackingDelivery;
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Geolocation</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+
+</head>
+
+<body>
+	<form action="" method="">
+	
+		<input type="text" id="latForDelivery" name="latForDelivery"
+            onchange= "hello()" value="7">
+            <input type="text" id="test" name="test"
+            onchange= "hello()" value="999">
+            
+	</form>
+        <?php $test = print("<script>
+        var v =document.getElementById('latForDelivery').value;
+        document.getElementById('test').value = v ;</script>")  ;?>
+        <script>
+            var lat = document.getElementById("latForDelivery").value;
+            setInterval(() => {
+            lat = lat + 1;
+            document.getElementById("latForDelivery").value = lat ;
+            var w  = 777;
+            
+
+            <?php
+            Event::dispatch(new TrackingDelivery(1,$test = "<script>
+            var v =document.getElementById('latForDelivery').value;</script>", '222'));?>
+        }, 1000);
+        </script>
+        
+    </body>
+
+    </html>
+
+    ================================
+    function onLoadForm(form){
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST" , form.getAttribute("action") , true );
+            xhr.setRequestHeader("Content-Type" , "application/x-www-form-urlencoded");
+            var formData = new FormData(form);
+            xhr.send( formData );
+        }
+    onsubmit = "return onLoadForm(this)
+    ================================
